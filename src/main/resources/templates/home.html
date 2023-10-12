@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Pizzeria</title>
+    <link rel="stylesheet" href="/webjars/bootstrap/5.3.2/css/bootstrap.min.css">
+    
+    <style>
+		
+		img{
+		  height: 350px; 
+		  object-fit: cover; 
+		}
+		
+	</style>
+</head>
+<body>
+	<header class="bg-dark">
+		<footer class="container">
+			<section class="pt-3 pb-3 row">
+				<div class="col-3 d-flex align-items-center">
+					<h3 class="p-0 m-0 text-white">La migliore pizza</h3>
+				</div>
+			</section>
+		</footer>
+	</header>
+	
+	<main class="bg-light vh-100">
+		<section class="container">			
+			<div class="text-center pt-5 pb-4">			
+				<h4 class="text-primary text-dark">Il nostro catalogo...</h4>
+			</div>
+			<div class="text-center pt-5 pb-4">			
+				<form>
+				    <div class="mb-3 d-flex align-items-center">
+				        <input type="text" class="form-control w-auto d-inline me-2" name="nome" id="nome" placeholder="Nome pizza..." th:value="${nome}">
+				        <input type="number" class="form-control w-auto d-inline me-2" name="voto" id="voto" placeholder="voto minimo" min="0" max="10" style="min-width: 130px;" th:value="${voto}">
+				        <select class="form-select" aria-label="Default select example" name="allergeni" style="width: auto;">
+						  <option selected value="">Allergeni</option>
+						  <option value="1">Si</option>
+						  <option value="0">No</option>
+						</select>
+				        <button type="submit" class="btn btn-primary ms-2">Cerca</button>
+				    </div>
+				</form>
+			</div>
+			<div class="row">
+				<div class="d-flex align-items-center">
+					<p class="p-0 m-0">Aggiungi una nuova pizza</p>
+					<a class="btn btn-primary ms-2" th:href="@{/create}" role="button">+</a>
+				</div>
+			    <div class="col-4 pt-4" th:if="${not #lists.isEmpty(pizzas)}" th:each="pizza : ${pizzas}">
+			        <div class="card m-auto border-0">
+			            <img class="card-img-top" th:src="${pizza.image}" alt="card">
+			            <div class="card-body">
+							<div class="d-flex justify-content-between">
+			                	<h5 class="card-title" th:text="${pizza.nome}"></h5>
+			                	<p class="card-text" th:text="${pizza.prezzo} + ' ' + euro"></p>	
+							</div>
+			                <p class="card-text" th:text="${pizza.descrizione}"></p>
+			                <p>Voto: <span class="card-text" th:text="${pizza.voto}"></span> su 10</p>
+			                 
+			                <p class="card-text">
+								Allergeni:
+								<span th:if="${pizza.allergeni}">Si</span>
+								<span th:if="${not pizza.allergeni}">No</span>
+							</p>
+			                <a class="btn btn-primary btn-sm" th:href="@{/pizza/{id}(id=${pizza.id})}">Guarda</a>
+			                <a class="btn btn-success btn-sm" th:href="@{/edit/{id}(id=${pizza.id})}">Modifica</a>
+			                
+			                <form class="d-inline" id="pizza-form" th:action="@{/delete/{id}(id=${pizza.id})}" method="post">
+								 <button type="submit" class="btn btn-danger btn-sm">Elimina</button>
+							</form>
+			            </div>
+			        </div>
+			    </div>
+			    <div th:if="${#lists.isEmpty(pizzas)}">
+			        <p class="text-center mt-4">Non ci sono pizze da mostrare.</p>
+			    </div>
+			</div>
+		</section>
+	</main>
+     
+</body>
+</html>

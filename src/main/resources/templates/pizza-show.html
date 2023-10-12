@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Pizzeria</title>
+<link rel="stylesheet" href="/webjars/bootstrap/5.3.2/css/bootstrap.min.css">
+ <style>
+		
+		img{
+		  height: 250px; 
+		  object-fit: cover; 
+		}
+		
+		.img-show-page{
+			width: 100%; 
+			height: auto;
+			max-height: 400px;
+		}
+		
+	</style>
+</head>
+<body>
+	<header class="bg-dark">
+		<footer class="container">
+			<section class="pt-3 pb-3 row">
+				<div class="col-3 d-flex align-items-center">
+					<h3 class="p-0 m-0 text-white">La migliore pizza</h3>
+				</div>
+				<div class="col-9">
+					<a class="btn btn-outline-light" th:href="@{/}" role="button">Home</a>
+				</div>
+			</section>
+		</footer>
+	</header>
+	
+	<main class="bg-light vh-100">
+		<section class="container">			
+			<div class="text-center pt-5 pb-4">			
+				<h1 class="text-primary text-dark">Pizza selezionata</h1>
+			</div>
+			<div class="row">
+				<div class="col">
+					<div class="bg-white rounded-4 p-4">
+						<div class="row">
+							<div class="col-8">
+						  		<img class="card-img-top img-show-page rounded-4" th:src="${pizza.image}" alt="card">
+							</div>
+							<div class="col-4">
+								<div class="card-body">
+								    <div class="d-flex justify-content-between">
+					                	<h5 class="card-title mb-2" th:text="${pizza.nome}"></h5>
+					                	<p class="card-text" th:text="${pizza.prezzo} + ' ' + euro"></p>	
+									</div>
+								    <p class="card-text" th:text="${pizza.descrizione}"></p>
+								    <p>Voto: <span class="card-text" th:text="${pizza.voto}"></span> su 10</p> 
+					                <p class="card-text">
+										Allergeni:
+										<span th:if="${pizza.allergeni}">Si</span>
+										<span th:if="${not pizza.allergeni}">No</span>
+									</p>
+									
+									<a class="btn btn-primary btn-sm" th:href="@{/pizza/{id}(id=${pizza.id})}">Guarda</a>
+					                <a class="btn btn-success btn-sm" th:href="@{/edit/{id}(id=${pizza.id})}">Modifica</a>
+					                <form class="d-inline" id="pizza-form" th:action="@{/delete/{id}(id=${pizza.id})}" method="post">
+										 <button type="submit" class="btn btn-danger btn-sm">Elimina</button>
+									</form>
+									
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
+		<section class="container">
+			 
+			<div class="row" th:if="${not #lists.isEmpty(pizzas)}">
+				<div class="mt-5">
+					<h3>Tutte le altre pizze:</h3>
+				</div>
+			    <div class="col-3 pt-4" th:each="pizza : ${pizzas}">
+			        <div class="card m-auto border-0">
+			            <img class="card-img-top" th:src="${pizza.image}" alt="card">
+			            <div class="card-body">
+							<div class="d-flex justify-content-between">
+			                	<h5 class="card-title" th:text="${pizza.nome}"></h5>
+			                	<p class="card-text" th:text="${pizza.prezzo} + ' ' + euro"></p>	
+							</div>
+			                <p class="card-text" th:text="${pizza.descrizione}"></p>
+			                <a class="btn btn-primary btn-sm mb-2" style="margin-right: 4px;" th:href="@{/pizza/{id}(id=${pizza.id})}">Guarda</a>
+			                <a class="btn btn-success btn-sm mb-2" th:href="@{/edit/{id}(id=${pizza.id})}">Modifica</a>
+			                
+			                <form class="d-inline mb-2" id="pizza-form-delete" th:action="@{/delete/{id}(id=${pizza.id})}" method="post">
+								 <button type="submit" class="btn btn-danger btn-sm">Elimina</button>
+							</form>
+			            </div>
+			        </div>
+			    </div>
+			</div>
+		</section>
+		
+		<section class="container" th:if="${not #lists.isEmpty(pizza.specialOffers)}">
+			<div class="d-flex align-items-center mt-5 mb-3">
+				<h3>Offerte Speciali</h3>
+				<a class="btn btn-primary ms-2" th:href="@{/pizza/{id}/new-offer(id=${pizza.id})}" role="button">+</a>
+			</div>
+			<table class="table">
+				<thead class="thead-dark">
+			    <tr>
+			        <th>Titolo</th>
+			        <th>Data di Inizio</th>
+			        <th>Data di Fine</th>
+			    </tr>
+			    </thead>
+			    <tr th:each="item : ${pizza.specialOffers}">
+			        <td th:text="${item.titolo}">Titolo</td>
+			        <td th:text="${item.dataInizio}">Data di Inizio</td>
+			        <td th:text="${item.dataFine}">Data di Fine</td>
+			    </tr>
+			</table>
+		</section>
+		
+	</main>
+	
+</body>
+</html>
