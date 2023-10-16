@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Pizzeria</title>
+<link rel="stylesheet" href="/webjars/bootstrap/5.3.2/css/bootstrap.min.css">
+ <style>
+		
+		img{
+		  height: 250px; 
+		  object-fit: cover; 
+		}
+		
+		.img-show-page{
+			width: 100%; 
+			height: auto;
+			max-height: 400px;
+		}
+		
+	</style>
+</head>
+<body>
+	<header class="bg-dark">
+		<footer class="container">
+			<section class="pt-3 pb-3 row">
+				<div class="col-3 d-flex align-items-center">
+					<h3 class="p-0 m-0 text-white">La migliore pizza</h3>
+				</div>
+				<div class="col-9">
+					<a class="btn btn-outline-light" th:href="@{/}" role="button">Home</a>
+				</div>
+			</section>
+		</footer>
+	</header>
+	
+	<main class="bg-light vh-100">
+		
+		
+		<section class="container" th:if="${not #lists.isEmpty(categories)}">
+			<div class="d-flex align-items-center pt-5 mb-3">
+				<h3>Categorie:</h3>
+				
+			</div>
+			<table class="table w-25">
+				<thead class="thead-dark">
+			    <tr>
+			        <th>Categoria</th>
+			        <th>Azioni</th>
+			    </tr>
+			    </thead>
+			    <tr th:each="item : ${categories}">
+			        <td th:text="${item.nome}"></td>
+			        <td>
+						<a class="btn btn-primary btn-sm ms-2" th:href="@{/pizza/edit/new-category/{id}(id=${item.id})}" role="button">Modifica</a>
+					</td>
+			    </tr>
+			</table>
+		</section>
+		
+
+		
+	</main>
+	
+</body>
+</html>

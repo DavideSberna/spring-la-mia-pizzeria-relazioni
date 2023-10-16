@@ -99,10 +99,29 @@
 			</div>
 		</section>
 		
+		<section class="container" th:if="${not #lists.isEmpty(pizza.categorie)}">
+			<div class="d-flex align-items-center mt-5 mb-3">
+				<h3>Categorie</h3>
+				<a class="btn btn-primary btn-sm ms-2" th:href="@{/pizza/{id}/new-category(id=${pizza.id})}" role="button">+</a>
+			</div>
+			<table class="table w-25">
+				<thead class="thead-dark">
+			    <tr>
+			        <th>Categoria</th>
+			       
+			    </tr>
+			    </thead>
+			    <tr th:each="item : ${pizza.categorie}">
+			        <td th:text="${item.nome}"></td>
+			        
+			    </tr>
+			</table>
+		</section>
+		
 		<section class="container" th:if="${not #lists.isEmpty(pizza.specialOffers)}">
 			<div class="d-flex align-items-center mt-5 mb-3">
 				<h3>Offerte Speciali</h3>
-				<a class="btn btn-primary ms-2" th:href="@{/pizza/{id}/new-offer(id=${pizza.id})}" role="button">+</a>
+				<a class="btn btn-primary btn-sm ms-2" th:href="@{/pizza/new-offer/{id}(id=${pizza.id})}" role="button">+</a>
 			</div>
 			<table class="table">
 				<thead class="thead-dark">
@@ -110,12 +129,16 @@
 			        <th>Titolo</th>
 			        <th>Data di Inizio</th>
 			        <th>Data di Fine</th>
+			        <th>Azioni</th>
 			    </tr>
 			    </thead>
 			    <tr th:each="item : ${pizza.specialOffers}">
-			        <td th:text="${item.titolo}">Titolo</td>
-			        <td th:text="${item.dataInizio}">Data di Inizio</td>
-			        <td th:text="${item.dataFine}">Data di Fine</td>
+			        <td th:text="${item.titolo}"></td>
+			        <td th:text="${item.dataInizio}"></td>
+			        <td th:text="${item.dataFine}"></td>
+			        <td>
+						<a class="btn btn-primary btn-sm ms-2" th:href="@{/pizza/edit/new-offer/{id}(id=${item.id})}" role="button">Modifica</a>
+					</td>
 			    </tr>
 			</table>
 		</section>

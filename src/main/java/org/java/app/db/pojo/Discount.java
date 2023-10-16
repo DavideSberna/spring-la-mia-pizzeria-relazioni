@@ -1,6 +1,7 @@
 package org.java.app.db.pojo;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -61,6 +62,33 @@ public class Discount {
 	public void setDataFine(LocalDate dataFine) {
 		this.dataFine = dataFine;
 	}
+	
+	public String getHtmlStartDate() {
+
+		return getDataInizio() == null
+				? null
+				: getDataInizio().format(DateTimeFormatter.ofPattern("YYYY-MM-dd"));
+	}
+	
+	public void setHtmlStartDate(String date) {
+
+		setDataInizio(LocalDate.parse(date));
+	}
+	
+	
+	public String getHtmlEndDate() {
+
+		return getDataFine() == null
+				? null
+				: getDataFine().format(DateTimeFormatter.ofPattern("YYYY-MM-dd"));
+	}
+	
+	public void setHtmlEndDate(String date) {
+
+		setDataFine(LocalDate.parse(date));
+	}
+	
+	
 	public String getTitolo() {
 		return titolo;
 	}

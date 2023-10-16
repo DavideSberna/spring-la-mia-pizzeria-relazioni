@@ -2,8 +2,10 @@ package org.java.app;
 
 import java.time.LocalDate;
 
+import org.java.app.db.pojo.Category;
 import org.java.app.db.pojo.Discount;
 import org.java.app.db.pojo.Pizza;
+import org.java.app.db.serv.CategoryService;
 import org.java.app.db.serv.DiscountService;
 import org.java.app.db.serv.PizzaService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +22,9 @@ public class SpringLaMiaPizzeriaCrudApplication implements CommandLineRunner {
 	
 	@Autowired
 	private DiscountService discountService;
+	
+	@Autowired
+	private CategoryService categoryService;
 
 	public static void main(String[] args) {
 		SpringApplication.run(SpringLaMiaPizzeriaCrudApplication.class, args);
@@ -39,7 +44,7 @@ public class SpringLaMiaPizzeriaCrudApplication implements CommandLineRunner {
 		pizzaService.save(pizza4);
 		
 		Discount disc1 = new Discount(pizza1, LocalDate.of(2020, 5, 5), LocalDate.of(2020, 5, 5), "sconto1");
-		Discount disc2 = new Discount(pizza2, LocalDate.of(2020, 5, 5), LocalDate.of(2020, 5, 5), "sconto2");
+		Discount disc2 = new Discount(pizza1, LocalDate.of(2020, 5, 5), LocalDate.of(2020, 5, 5), "sconto2");
 		Discount disc3 = new Discount(pizza3, LocalDate.of(2020, 5, 5), LocalDate.of(2020, 5, 5), "sconto3");
 		
 		
@@ -48,6 +53,18 @@ public class SpringLaMiaPizzeriaCrudApplication implements CommandLineRunner {
 		discountService.save(disc1);
 		discountService.save(disc2);
 		discountService.save(disc3);
+		
+		
+		Category c1 = new Category("cat 1" , pizza1, pizza2);
+		Category c2 = new Category("cat 2" , pizza3);
+		Category c3 = new Category("cat 3" , pizza4);
+		Category c4 = new Category("cat 4" , pizza1, pizza4);
+		
+		
+		categoryService.save(c1);
+		categoryService.save(c2);
+		categoryService.save(c3);
+		categoryService.save(c4);
 	 
 		
 	}

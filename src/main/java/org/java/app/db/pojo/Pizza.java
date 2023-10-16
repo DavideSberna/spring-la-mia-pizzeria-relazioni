@@ -9,7 +9,9 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.OneToMany;
+
 import jakarta.validation.constraints.DecimalMin;
 import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;
@@ -44,7 +46,13 @@ public class Pizza {
 	
 	@OneToMany(mappedBy = "pizza")
 	private List<Discount> specialOffers;
-	 
+	
+
+	@ManyToMany(mappedBy = "pizze")
+	private List<Category> categorie; 
+
+	
+	
 	 
 	public Pizza() {}
 	public Pizza(String nome, String descrizione, String image, double prezzo, int voto, boolean allergeni) {
@@ -110,6 +118,13 @@ public class Pizza {
 	}
 	public void setSpecialOffers(List<Discount> specialOffers) {
 		this.specialOffers = specialOffers;
+	}
+	
+	public List<Category> getCategorie() {
+		return categorie;
+	}
+	public void setCategorie(List<Category> categorie) {
+		this.categorie = categorie;
 	}
 	
 	
