@@ -10,7 +10,8 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface DiscountRepo extends JpaRepository<Discount, Integer> {
 	
-	public List<Pizza> findByTitolo(String titolo);
+	public List<Discount> findByTitolo(String titolo);
 	
+	public List<Discount> deleteById(int id);
 
 }

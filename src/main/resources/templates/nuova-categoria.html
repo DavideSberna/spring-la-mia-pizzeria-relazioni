@@ -38,23 +38,22 @@
 			<div class="pt-5 pb-3">				
 				 
 			</div>
-			<form class="col-6 m-auto" th:action="@{/pizza/{id}/new-category(id=${pizza.id})}" method="POST">
+			<form class="col-6 m-auto" th:action="${ pizzas != null ? '/pizza/new-category' : '/pizza/' + c_id + '/new-category'}" method="POST">
 				
 				<div class="form-group mb-3">
-				    <label for="titolo">Nome</label>
-				    <input type="text" class="form-control" id="titolo" name="titolo" placeholder="..." th:field="${category.nome}">
+				    <label for="nome">Nome</label>
+				    <input type="text" class="form-control" id="nome" name="nome" placeholder="..." th:field="${category.nome}">
 				</div>
 				
-				<div th:if="${pizza.id == 0}">
-					<div th:each="pizza : ${pizzas}">
-			            <label>
-			                <input type="checkbox"  th:field="${pizza.id}" th:value="${pizza.nome}" />
-			                <span th:text="${pizza.nome}"></span>
-			            </label><br />
-			        </div>
-				</div>
+				<div th:each="pizza : ${pizzas}">
+		            <label>
+		                <input type="checkbox" name="pizzaIds" th:value="${pizza.id}" />
+		                <span th:text="${pizza.nome}"></span>
+		            </label><br />
+		        </div>
 				
-				  
+				
+			
 			   <button type="submit" class="btn btn-primary">Aggiungi</button>
 	
 			</form>

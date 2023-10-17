@@ -38,7 +38,7 @@
 			<div class="pt-5 pb-3">				
 				<h3 class="text-center" th:text="${pizza.nome}"></h3>
 			</div>
-			<form class="col-6 m-auto" th:action="@{/pizza/new-offer/{id} (id=${pizza.id})}" method="POST">
+			<form class="col-6 m-auto" th:action="@{/pizza/{id}/new-offer(id=${pizza.id})}" method="POST">
 				
 				<div class="form-group mb-3">
 				    <label for="titolo">Titolo</label>

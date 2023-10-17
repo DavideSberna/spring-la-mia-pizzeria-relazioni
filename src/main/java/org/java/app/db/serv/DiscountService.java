@@ -25,5 +25,9 @@ public class DiscountService {
 	public Discount findById(int id) {
 		return discountRepo.findById(id).get();
 	}
+	
+	public List<Discount> deleteById(int id) {
+		return discountRepo.deleteById(id);
+	}
 
 }

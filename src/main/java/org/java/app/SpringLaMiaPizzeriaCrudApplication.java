@@ -43,9 +43,16 @@ public class SpringLaMiaPizzeriaCrudApplication implements CommandLineRunner {
 		pizzaService.save(pizza3);
 		pizzaService.save(pizza4);
 		
-		Discount disc1 = new Discount(pizza1, LocalDate.of(2020, 5, 5), LocalDate.of(2020, 5, 5), "sconto1");
+		Discount disc1 = new Discount(pizza1, LocalDate.of(2020, 7, 5), LocalDate.of(2020, 6, 5), "sconto1");
 		Discount disc2 = new Discount(pizza1, LocalDate.of(2020, 5, 5), LocalDate.of(2020, 5, 5), "sconto2");
-		Discount disc3 = new Discount(pizza3, LocalDate.of(2020, 5, 5), LocalDate.of(2020, 5, 5), "sconto3");
+		Discount disc3 = new Discount(pizza3, LocalDate.of(2020, 6, 12), LocalDate.of(2020, 7, 5), "sconto3");
+		Discount disc4 = new Discount(pizza3, LocalDate.of(2020, 7, 16), LocalDate.of(2020, 5, 5), "sconto3");
+		Discount disc5 = new Discount(pizza3, LocalDate.of(2020, 8, 5), LocalDate.of(2020, 9, 5), "sconto3");
+		Discount disc6 = new Discount(pizza2, LocalDate.of(2020, 9, 28), LocalDate.of(2020, 10, 5), "sconto3");
+		Discount disc7 = new Discount(pizza2, LocalDate.of(2020, 1, 23), LocalDate.of(2020, 11, 5), "sconto4");
+		Discount disc8 = new Discount(pizza4, LocalDate.of(2020, 2, 21), LocalDate.of(2020, 12, 5), "sconto3");
+		Discount disc9 = new Discount(pizza4, LocalDate.of(2020, 3, 6), LocalDate.of(2020, 3, 5), "sconto3");
+		Discount disc10 = new Discount(pizza4, LocalDate.of(2020, 4, 4), LocalDate.of(2020, 5, 5), "sconto3");
 		
 		
 		 
@@ -53,12 +60,19 @@ public class SpringLaMiaPizzeriaCrudApplication implements CommandLineRunner {
 		discountService.save(disc1);
 		discountService.save(disc2);
 		discountService.save(disc3);
+		discountService.save(disc4);
+		discountService.save(disc5);
+		discountService.save(disc6);
+		discountService.save(disc7);
+		discountService.save(disc8);
+		discountService.save(disc9);
+		discountService.save(disc10);
 		
 		
-		Category c1 = new Category("cat 1" , pizza1, pizza2);
-		Category c2 = new Category("cat 2" , pizza3);
-		Category c3 = new Category("cat 3" , pizza4);
-		Category c4 = new Category("cat 4" , pizza1, pizza4);
+		Category c1 = new Category("cat 1" , pizza1, pizza2, pizza3, pizza4);
+		Category c2 = new Category("cat 2" , pizza3, pizza2);
+		Category c3 = new Category("cat 3" , pizza4, pizza3);
+		Category c4 = new Category("cat 4" , pizza1, pizza4, pizza3);
 		
 		
 		categoryService.save(c1);

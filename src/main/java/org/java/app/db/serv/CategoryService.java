@@ -3,6 +3,7 @@ package org.java.app.db.serv;
 import java.util.List;
 
 import org.java.app.db.pojo.Category;
+import org.java.app.db.pojo.Pizza;
 import org.java.app.db.repo.CategoryRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -23,5 +24,9 @@ public class CategoryService {
 	
 	public void save(Category category) {
 		categoryRepo.save(category);
+	}
+	
+	public List<Category> deleteById(int id){
+		return categoryRepo.deleteById(id);
 	}
 }

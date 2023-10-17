@@ -121,7 +121,7 @@
 		<section class="container" th:if="${not #lists.isEmpty(pizza.specialOffers)}">
 			<div class="d-flex align-items-center mt-5 mb-3">
 				<h3>Offerte Speciali</h3>
-				<a class="btn btn-primary btn-sm ms-2" th:href="@{/pizza/new-offer/{id}(id=${pizza.id})}" role="button">+</a>
+				<a class="btn btn-primary btn-sm ms-2" th:href="@{/pizza/{id}/new-offer(id=${pizza.id})}" role="button">+</a>
 			</div>
 			<table class="table">
 				<thead class="thead-dark">
@@ -138,6 +138,9 @@
 			        <td th:text="${item.dataFine}"></td>
 			        <td>
 						<a class="btn btn-primary btn-sm ms-2" th:href="@{/pizza/edit/new-offer/{id}(id=${item.id})}" role="button">Modifica</a>
+						<form class="d-inline" id="pizza-form" th:action="@{/pizza/delete/offer/{id}(id=${item.id})}" method="post">
+								 <button type="submit" class="btn btn-danger btn-sm">Elimina</button>
+						</form>
 					</td>
 			    </tr>
 			</table>

@@ -39,9 +39,10 @@
 		<section class="container" th:if="${not #lists.isEmpty(categories)}">
 			<div class="d-flex align-items-center pt-5 mb-3">
 				<h3>Categorie:</h3>
+				<a class="btn btn-primary btn-sm ms-2" th:href="@{/pizza/new-category}" role="button">+</a>
 				
 			</div>
-			<table class="table w-25">
+			<table class="table w-auto">
 				<thead class="thead-dark">
 			    <tr>
 			        <th>Categoria</th>
@@ -51,7 +52,10 @@
 			    <tr th:each="item : ${categories}">
 			        <td th:text="${item.nome}"></td>
 			        <td>
-						<a class="btn btn-primary btn-sm ms-2" th:href="@{/pizza/edit/new-category/{id}(id=${item.id})}" role="button">Modifica</a>
+						<a class="btn btn-success btn-sm ms-2" th:href="@{/pizza/edit/new-category/{id}(id=${item.id})}" role="button">Modifica</a>
+						<form class="d-inline" id="pizza-form" th:action="@{delete/category/{id}(id=${item.id})}" method="post">
+								 <button type="submit" class="btn btn-danger btn-sm">Elimina</button>
+						</form>
 					</td>
 			    </tr>
 			</table>
